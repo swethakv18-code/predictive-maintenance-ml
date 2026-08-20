@@ -26,7 +26,7 @@ The solution demonstrates an end-to-end machine learning workflow:
 
 ## 📊 Dataset
 
-The project uses the **AI4I 2020 Predictive Maintenance Dataset**, which contains machine operating measurements and failure information.
+The project uses the **AI4I 2020 Predictive Maintenance Dataset**, which contains machine operating measurements and machine failure information.
 
 Key variables include:
 
@@ -98,7 +98,7 @@ The final model was evaluated on the held-out test set.
 | ROC-AUC   | 97.56% |
 | PR-AUC    | 89.77% |
 
-Because predictive maintenance is a failure-detection problem, **recall is particularly important**: missing an actual machine failure can result in unexpected downtime and maintenance costs.
+Because predictive maintenance is a failure-detection problem, **recall is particularly important**. Missing an actual machine failure can result in unexpected downtime and maintenance costs.
 
 ## 🔍 Explainable AI with SHAP
 
@@ -128,7 +128,7 @@ The Streamlit application provides an interactive interface for:
 
 A FastAPI service exposes the trained model through a REST API.
 
-The API accepts machine operating conditions and returns a prediction and associated probability.
+The API accepts machine operating conditions and returns a machine failure prediction and associated probability.
 
 ### Prediction Endpoint
 
@@ -136,9 +136,9 @@ The API accepts machine operating conditions and returns a prediction and associ
 POST /predict
 ```
 
-The API provides automatically generated Swagger documentation for testing the endpoint.
+### API Documentation
 
-When running locally:
+When running locally, FastAPI provides interactive Swagger documentation at:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -146,7 +146,7 @@ http://127.0.0.1:8000/docs
 
 ## 🐳 Docker Deployment
 
-The FastAPI prediction service has been **containerized using Docker** and tested successfully.
+The FastAPI prediction service has been **containerized using Docker and successfully tested**.
 
 The Dockerized application successfully:
 
@@ -182,32 +182,34 @@ Machine Failure Prediction
 ```text
 predictive-maintenance-ml/
 │
-├── app/
-│   ├── app.py
-│   └── api.py
-│
-├── data/
-│   └── README.md
-│
-├── models/
-│   ├── predictive_maintenance_gb_model.pkl
-│   └── predictive_maintenance_preprocessor.pkl
-│
-├── notebooks/
-│   └── predictive_maintenance.ipynb
-│
-├── src/
-│   └── ...
-│
-├── requirements.txt
+├── ai4i2020.csv
+├── app.py
+├── main.py
 ├── Dockerfile
+├── requirements.txt
+│
+├── predictive_maintenance_gb_model.pkl
+├── predictive_maintenance_model.pkl
+├── predictive_maintenance_preprocessor.pkl
+│
 ├── .gitignore
 └── README.md
 ```
 
-> **Note:** The project structure should match the actual files committed to the repository.
+### Main Files
 
-## ▶️ Running the Project
+| File                                      | Description                               |
+| ----------------------------------------- | ----------------------------------------- |
+| `ai4i2020.csv`                            | AI4I 2020 predictive maintenance dataset  |
+| `app.py`                                  | Streamlit interactive dashboard           |
+| `main.py`                                 | FastAPI prediction API                    |
+| `Dockerfile`                              | Docker configuration for containerization |
+| `requirements.txt`                        | Python dependencies                       |
+| `predictive_maintenance_gb_model.pkl`     | Trained Gradient Boosting model           |
+| `predictive_maintenance_model.pkl`        | Saved machine learning model              |
+| `predictive_maintenance_preprocessor.pkl` | Data preprocessing pipeline               |
+
+## ▶️ Running the Project Locally
 
 ### 1. Clone the repository
 
@@ -225,7 +227,7 @@ pip install -r requirements.txt
 ### 3. Run the FastAPI application
 
 ```bash
-uvicorn app.api:app --reload
+uvicorn main:app --reload
 ```
 
 API documentation:
@@ -236,8 +238,10 @@ http://127.0.0.1:8000/docs
 
 ### 4. Run the Streamlit application
 
+Open another terminal in the project directory:
+
 ```bash
-streamlit run app/app.py
+streamlit run app.py
 ```
 
 ## 🐳 Running with Docker
@@ -259,6 +263,8 @@ The FastAPI Swagger documentation can then be accessed at:
 ```text
 http://localhost:8000/docs
 ```
+
+The `/predict` endpoint can be tested directly through Swagger.
 
 ## 💡 Key Skills Demonstrated
 
@@ -291,5 +297,3 @@ http://localhost:8000/docs
 Data Science | Data Analytics | Machine Learning | Generative AI
 
 GitHub: **swethakv18-code**
-
-LinkedIn: **Swetha K V**
